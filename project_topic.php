@@ -1,0 +1,92 @@
+<?php include("global.php"); ?>
+<html>
+<head>
+    <title>電子工程系實務專題題目</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel=stylesheet type="text/css" href="style.css">
+</head>
+ 
+<body bgcolor="#ffffcc" style="font-family:Microsoft JhengHei;">
+
+<?php
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    else echo "no session";
+?>
+
+<h2 align="center"><?php echo $now_year  ?> 年度電子工程系實務專題題目</h2>
+
+<!--以下form-->
+<form id="form1″ name="form1″ method="post" action="project_topic_check.php">
+    <!--以下table-->
+    <table border="1" align="center" width="80%"  cellpadding="3">  <!--邊框的寬度=1像素-->
+
+    <tr>
+        <td align="center">老師姓名</td>
+        <td align="center"> <?php echo $_SESSION['tname']?> </td>     <!--由session抓-->
+    </tr>
+
+    <tr>
+        <td align="center">專題類別</td>
+        <td>
+            <input type="checkbox" value="計算機軟體" name="category_1">計算機軟體&nbsp;&nbsp;<!--&nbsp;為空白-->
+            <input type="checkbox" value="計算機硬體" name="category_2">計算機硬體<br/>
+            <input type="checkbox" value="數位訊號處理" name="category_3">數位訊號處理
+            <input type="checkbox" value="電力電子" name="category_4">電力電子<br/>
+            <input type="checkbox" value="嵌入式系統" name="category_5">嵌入式系統&nbsp;&nbsp;
+            <input type="checkbox" value="微波" name="category_6">微波<br/>
+            <input type="checkbox" value="通訊" name="category_7">通訊&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" value="元件及材料" name="category_8">元件及材料<br/>
+            <input type="checkbox" value="光電" name="category_9">光電&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" value="網路系統" name="category_10">網路系統<br/>
+            <input type="checkbox" value="VLSI" name="category_11">VLSI<br/>
+            <input type="checkbox" value="其他" name="category_12">其他(請輸入)&nbsp;<input type="text" name="other">
+        </td> 
+    </tr>
+
+    <tr>
+        <td align="center">專題名稱</td>
+        <td><input cols="100" rows="5" name="topic"></input></td>  
+    </tr>
+
+    <tr>
+        <td align="center">內容概述</td>
+        <td><textarea type="text" name="textarea_1"></textarea></td>  
+    </tr>
+
+    <tr>
+        <td align="center">參加者須具備之條件</td>
+        <td><textarea cols="100" rows="5" name="textarea_2"></textarea></td>
+    </tr>
+
+    <tr>
+        <td align="center">參加人數之限制</td>
+        <td><input type="text" name="textarea_3"></input></td>
+        <!--下拉式選單-->
+        <!--
+        <td>
+            <select name="YourLocation">
+                <option value="1">1人</option>
+                <option value="2">2人</option>
+                <option value="3">3人</option>
+            </select>
+        -->
+        </td>
+    </tr>
+
+    </table>
+    <!--以上table-->
+    <br/>
+    <center>
+        <button type="submit" name="submit" style="width:120px;height:40px;font-size:20px;font-family:Microsoft JhengHei;">填寫完畢</button> 
+        <input type="reset"  name="reset" value="重新填寫" style="width:120px;height:40px;font-size:20px;font-family:Microsoft JhengHei;">
+        <br/><br/>
+    </center>
+
+</form>
+<!--以上form-->
+
+</body>
+ 
+</html>

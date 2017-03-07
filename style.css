@@ -1,0 +1,13 @@
+.short_textbox
+{
+	max-width: 50;
+	text-align: center;
+}
+
+.long_textbox
+{
+	max-width: 80;
+	text-align: center;
+
+}
+
