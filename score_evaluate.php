@@ -193,6 +193,13 @@
 	
 	</script>
 
+
+	<?php
+
+
+
+	?>
+
 	<body bgcolor="#ffffcc" style="border:1px;font-family:Microsoft JhengHei;" >
 		<h2 align="center">電子系 <?php echo $now_year  ?> 年第 <?php echo $now_semester ?> 學期實務專題評分表</h2>
 
@@ -200,26 +207,29 @@
 		<div style="margin-left:10%">請選取欲評分之學生姓名: <select style="width:150px;height:30px;font-size:8;" name="dropdown" >;
 
 		<option value="default" name = "student_list">請選擇</option>;
-		<?php
 
-			if (!$link)  die('Not connected : ' . mysql_error());
-		 	$str="	SELECT Sname
+
+
+		 <?php 	
+		 	
+		 	if (!$link)  die('Not connected : ' . mysql_error());
+
+			// Student.Sname
+		 	$str="	SELECT Student.Sname
 		 			FROM Student,Score
-		 			WHERE Score.total='0' AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Sid = Student.Sid
+		 			WHERE Score.score_1 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Sid = Student.Sid
 		 	  	 "; 
+
+		 	// Student.Sid
 		 	$id="	SELECT Student.Sid
 		 			FROM Student,Score
-		 			WHERE Score.total='0' AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Sid = Student.Sid
+		 			WHERE Score.score_1 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Sid = Student.Sid
 		 	  	 ";  	 
 		 	  	//已經被評分的不會顯示, 尚未評分的同學的Score.total='0'
 		 	$result = mysql_query($str,$link);
 		 	$result1 = mysql_query($id,$link);
 
-		?>
-
-
-		 <?php 	//下拉式選單
-	 	
+		 	//下拉式選單
 			 while ( $row['Sname'] = mysql_fetch_assoc($result))
 			 {
 			 	$row['Sid'] = mysql_fetch_assoc($result1);
