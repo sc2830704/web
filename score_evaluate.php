@@ -1,6 +1,20 @@
 ﻿<?php
 	if(!isset($_SESSION))	session_start();
 	include("global.php");
+
+	# choosing students in different semester
+	# $now_month = 6;
+	if($now_month==1 ||$now_month==2 || $now_month==3 ){
+		$y1 = (int)($now_year-1);
+		$y2 = (int)($now_year);
+		$stu1 = (string)$y1."2";
+		$stu2 = (string)$y2."1";
+	}
+	else if($now_month==5 ||$now_month==6 || $now_month==7){
+		$y = (int)($now_year);
+		$stu1 = (string)$y."1";
+		$stu2 = (string)$y."2";
+	}
 ?>
 
 <?php 
@@ -10,27 +24,27 @@
 	 			WHERE teacher_weight.user = '{$_SESSION["tid"]}'"; 
 	$result = mysql_query($query,$link);
  	$row = mysql_fetch_assoc($result);
- 	$tmp_w11 = $row['w11']*10;
- 	$tmp_w12 = $row['w12']*10;
- 	$tmp_w13 = $row['w13']*10;
- 	$tmp_w14 = $row['w14']*10;
- 	$tmp_w15 = $row['w15']*10;
- 	$tmp_w21 = $row['w21']*10;
- 	$tmp_w22 = $row['w22']*10;
- 	$tmp_w23 = $row['w23']*10;
- 	$tmp_w24 = $row['w24']*10;
- 	$tmp_w25 = $row['w25']*10;
- 	$tmp_w26 = $row['w26']*10;
- 	$tmp_w27 = $row['w27']*10;
- 	$tmp_w28 = $row['w28']*10;
- 	$tmp_w29 = $row['w29']*10;
- 	$tmp_w210 = $row['w210']*10;
- 	$tmp_w31 = $row['w31']*10;
- 	$tmp_w32 = $row['w32']*10;
- 	$tmp_w33 = $row['w33']*10;
- 	$tmp_w34 = $row['w34']*10;
- 	$tmp_w35 = $row['w35']*10;
- 	$tmp_w36 = $row['w36']*10;
+ 	$tmp_w11 = $row['w11']*100;
+ 	$tmp_w12 = $row['w12']*100;
+ 	$tmp_w13 = $row['w13']*100;
+ 	$tmp_w14 = $row['w14']*100;
+ 	$tmp_w15 = $row['w15']*100;
+ 	$tmp_w21 = $row['w21']*100;
+ 	$tmp_w22 = $row['w22']*100;
+ 	$tmp_w23 = $row['w23']*100;
+ 	$tmp_w24 = $row['w24']*100;
+ 	$tmp_w25 = $row['w25']*100;
+ 	$tmp_w26 = $row['w26']*100;
+ 	$tmp_w27 = $row['w27']*100;
+ 	$tmp_w28 = $row['w28']*100;
+ 	$tmp_w29 = $row['w29']*100;
+ 	$tmp_w210 = $row['w210']*100;
+ 	$tmp_w31 = $row['w31']*100;
+ 	$tmp_w32 = $row['w32']*100;
+ 	$tmp_w33 = $row['w33']*100;
+ 	$tmp_w34 = $row['w34']*100;
+ 	$tmp_w35 = $row['w35']*100;
+ 	$tmp_w36 = $row['w36']*100;
 
 ?>
 
@@ -193,6 +207,46 @@
 	
 	</script>
 
+
+	<?php
+		if (!$link)  die('Not connected : ' . mysql_error());
+
+		// Student.Sname
+	 	$str="	SELECT Student.Sname
+	 			FROM Student,Score
+	 			WHERE Score.score_2 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Semester='$stu1' AND Score.Sid = Student.Sid
+	 			UNION
+	 			SELECT Student.Sname
+	 			FROM Student,Score
+	 			WHERE Score.score_1 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Semester='$stu2' AND Score.Sid = Student.Sid
+
+	 	  	 "; 
+
+	 	// Student.Sid
+	 	$id="	SELECT Student.Sid
+	 			FROM Student,Score
+	 			WHERE Score.score_2 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Semester='$stu1'AND Score.Sid = Student.Sid
+	 			UNION
+	 			SELECT Student.Sid
+	 			FROM Student,Score
+	 			WHERE Score.score_1 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Semester='$stu2'AND Score.Sid = Student.Sid
+
+	 	  	 ";  	 
+	 	//已經被評分的不會顯示, 尚未評分的同學的Score.total='0'
+	 	$result = mysql_query($str,$link);
+	 	$result1 = mysql_query($id,$link);
+
+	 // 	echo "<br>";
+	 // 	while ( $row['Sname'] = mysql_fetch_assoc($result)){
+	 // 	 	print_r($row['Sname']);
+	 // 	}
+	 // 	echo "<br>";
+		// while ( $row['Sid'] = mysql_fetch_assoc($result1)){
+	 // 	 	print_r($row['Sid']);
+	 // 	} 	 	
+
+	?>
+
 	<body bgcolor="#ffffcc" style="border:1px;font-family:Microsoft JhengHei;" >
 		<h2 align="center">電子系 <?php echo $now_year  ?> 年第 <?php echo $now_semester ?> 學期實務專題評分表</h2>
 
@@ -200,26 +254,10 @@
 		<div style="margin-left:10%">請選取欲評分之學生姓名: <select style="width:150px;height:30px;font-size:8;" name="dropdown" >;
 
 		<option value="default" name = "student_list">請選擇</option>;
-		<?php
 
-			if (!$link)  die('Not connected : ' . mysql_error());
-		 	$str="	SELECT Sname
-		 			FROM Student,Score
-		 			WHERE Score.total='0' AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Sid = Student.Sid
-		 	  	 "; 
-		 	$id="	SELECT Student.Sid
-		 			FROM Student,Score
-		 			WHERE Score.total='0' AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Sid = Student.Sid
-		 	  	 ";  	 
-		 	  	//已經被評分的不會顯示, 尚未評分的同學的Score.total='0'
-		 	$result = mysql_query($str,$link);
-		 	$result1 = mysql_query($id,$link);
-
-		?>
-
-
-		 <?php 	//下拉式選單
-	 	
+		 <?php 	
+		 	
+		 	//下拉式選單
 			 while ( $row['Sname'] = mysql_fetch_assoc($result))
 			 {
 			 	$row['Sid'] = mysql_fetch_assoc($result1);
@@ -231,7 +269,7 @@
 			 }	
 
 		 ?>
-		</select><input type="button" name="load_weight" id="load_weight" value="讀取權重" style="width:120px;height:30px;font-size:20px" onclick="setValue(); eval_score();"></input>
+		</select><input type="button" name="load_weight" id="load_weight" value="讀取上次權重" style="width:150px;height:30px;font-size:20px" onclick="setValue(); eval_score();"></input>
 
 		<?php 	// 評完分
 			if(mysql_num_rows($result)<1) 

@@ -10,10 +10,11 @@
 	$get_sid = "SELECT Sid FROM Working_project WHERE Working_project.Semester = '$semester' AND Working_project.Group='$group' AND Working_project.No = '$no'";
 	$result = mysql_query($get_sid);
 	$count = 0;
+	$sids = array();
 	while($row = mysql_fetch_array($result)){
-		$sids[$count] = $row[$count];
+		$sids[$count] = $row[0];
 		$count++;
-	}	
+	}
 	foreach($sids as $sid){
 		$delete_score = "DELETE FROM Score WHERE Sid='$sid'";
 		$result2 = mysql_query($delete_score);

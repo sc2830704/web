@@ -76,7 +76,7 @@ if(isset($_POST['semester'])){
 										$.messager.alert("修改專題名稱",res);
 										setTimeout(function(){
 											location.reload();
-										},10000);
+										},1000);
 										
 								});	
 							}
