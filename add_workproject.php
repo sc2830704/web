@@ -1,4 +1,5 @@
 <?php
+	error_reporting(E_ERROR);
 	header("Content-Type:text/html;charset=utf-8");
 	include("auth_check.php");
 	include("global.php");

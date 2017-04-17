@@ -3,7 +3,7 @@
 	include("global.php");
 
 	# choosing students in different semester
-	# $now_month = 6;
+	// $now_month = 1;	# for test
 	if($now_month==1 ||$now_month==2 || $now_month==3 ){
 		$y1 = (int)($now_year-1);
 		$y2 = (int)($now_year);
@@ -12,8 +12,17 @@
 	}
 	else if($now_month==5 ||$now_month==6 || $now_month==7){
 		$y = (int)($now_year);
+		$y = (int)($now_year);
 		$stu1 = (string)$y."1";
 		$stu2 = (string)$y."2";
+	}
+	else{
+		echo '<body bgcolor="#ffffcc" style="font-family:Microsoft JhengHei;">';
+		echo "上學期評分時間：1月~3月<br>";
+		echo "下學期評分時間：5月~7月<br>";
+		echo "現在非評分時間!";
+		echo '</body>';
+		exit;
 	}
 ?>
 
@@ -218,9 +227,10 @@
 	 			UNION
 	 			SELECT Student.Sname
 	 			FROM Student,Score
-	 			WHERE Score.score_1 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Semester='$stu2' AND Score.Sid = Student.Sid
+	 			WHERE Score.score_1 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Semester='$stu2' AND Score.Sid = Student.Sid"; 
 
-	 	  	 "; 
+	 	$result = mysql_query($str,$link);  	 
+		
 
 	 	// Student.Sid
 	 	$id="	SELECT Student.Sid
@@ -229,12 +239,13 @@
 	 			UNION
 	 			SELECT Student.Sid
 	 			FROM Student,Score
-	 			WHERE Score.score_1 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Semester='$stu2'AND Score.Sid = Student.Sid
-
-	 	  	 ";  	 
+	 			WHERE Score.score_1 IS NULL AND Student.Tid ='{$_SESSION["tid"]}' AND Score.Semester='$stu2'AND Score.Sid = Student.Sid"; 
+	 			
+	 	$result1 = mysql_query($id,$link); 	 
+		
 	 	//已經被評分的不會顯示, 尚未評分的同學的Score.total='0'
-	 	$result = mysql_query($str,$link);
-	 	$result1 = mysql_query($id,$link);
+	 	
+	 	
 
 	 // 	echo "<br>";
 	 // 	while ( $row['Sname'] = mysql_fetch_assoc($result)){
