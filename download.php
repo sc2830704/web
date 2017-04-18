@@ -15,9 +15,17 @@ $query_group = "SELECT Semester,Working_project.Group,Working_project.No FROM Wo
 $result = mysql_query($query_group);
 $row = mysql_fetch_array($result);
 $group = $row[0].$row[1].$row[2];
-$query = "SELECT faculty.name_ch,Working_project.Pid,Working_project.Sid,Student.Sid,Sname,s11,s12,s13,s14,s15,s21,s22,s23,s24,s25,s26,s27,s28,s29,s210,s31,s32,s33,s34,s35,s36,
-		  w11,w12,w13,w14,w15,w21,w22,w23,w24,w25,w26,w27,w28,w29,w210,w31,w32,w33,w34,w35,w36,total FROM Working_project,Score,Student,faculty
-		  WHERE Score.Sid='$Sid' AND Score.Sid=Student.Sid AND Student.Sid=Working_project.Sid AND faculty.username=Student.Tid";
+if($order==1){
+	$query = "SELECT faculty.name_ch,Working_project.Pid,Working_project.Sid,Student.Sid,Sname,s11_1,s12_1,s13_1,s14_1,s15_1,s21_1,s22_1,s23_1,s24_1,s25_1,s26_1,s27_1,s28_1,
+	s29_1,s210_1,s31_1,s32_1,s33_1,s34_1,s35_1,s36_1,w11_1,w12_1,w13_1,w14_1,w15_1,w21_1,w22_1,w23_1,w24_1,w25_1,w26_1,w27_1,w28_1,w29_1,w210_1,w31_1,w32_1,w33_1,w34_1,w35_1,
+	w36_1 FROM Working_project,Score,Student,faculty WHERE Score.Sid='$Sid' AND Score.Sid=Student.Sid AND Student.Sid=Working_project.Sid AND faculty.username=Student.Tid";
+
+}else{
+	$query = "SELECT faculty.name_ch,Working_project.Pid,Working_project.Sid,Student.Sid,Sname,s11_2,s12_2,s13_2,s14_2,s15_2,s21_2,s22_2,s23_2,s24_2,s25_2,s26_2,s27_2,s28_2,
+	s29_2,s210_2,s31_2,s32_2,s33_2,s34_2,s35_2,s36_2,w11_2,w12_2,w13_2,w14_2,w15_2,w21_2,w22_2,w23_2,w24_2,w25_2,w26_2,w27_2,w28_2,w29_2,w210_2,w31_2,w32_2,w33_2,w34_2,w35_2
+	,w36_2,score_2,total FROM Working_project,Score,Student,faculty WHERE Score.Sid='$Sid' AND Score.Sid=Student.Sid AND Student.Sid=Working_project.Sid AND faculty.username=Student.Tid";
+
+}
 $result = mysql_query($query);
 
 error_reporting(E_ALL);
