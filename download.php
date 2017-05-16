@@ -27,7 +27,8 @@ if($order==1){
 
 }
 $result = mysql_query($query);
-
+echo 'query:'.$query;
+echo $result;
 error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
