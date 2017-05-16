@@ -95,10 +95,10 @@ if(isset($_POST['semester'])){
 	</body>
 	
 	<div align="center">
-		<a type="button" onClick="location.href='download_score-list.php?semester=<?php echo $semester;?>&order=1'" class="pure-button pure-button-primary">下載成績總覽表</a>  
+		<a type="button" onClick="location.href='download_score-list.php?semester=<?php echo $semester;?>&order=1'" class="pure-button pure-button-primary">下載成績總覽表-上學期</a>  
 	</div></br>
 	<div align="center">
-		<a type="button" onClick="location.href='download_score-list.php?semester=<?php echo $semester;?>&order=2'" class="pure-button pure-button-primary">下載成績總覽表2</a>  
+		<a type="button" onClick="location.href='download_score-list.php?semester=<?php echo $semester;?>&order=2'" class="pure-button pure-button-primary">下載成績總覽表-下學期</a>  
 	</div></br>
 	<div align="center"><a type="button" href="back_main.php" class="pure-button pure-button-primary">回主選單</a></div>
 </html>
