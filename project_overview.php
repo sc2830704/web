@@ -189,12 +189,12 @@ if(isset($_POST['semester'])){
 		</br>
 		<div align="center">
 			<!--<a type="button" onClick="location.href='download_score-list.php?semester=<?php echo $semester;?>'" class="pure-button pure-button-primary">下載成績總覽表</a>-->
-			<a type="button" onClick="location.href='download_overview.php?semester=<?php echo $semester;?>'" class="pure-button pure-button-primary">下載專題一覽表</a>
+			<a type="button" onClick="location.href='download_overview.php?semester=<?php echo $semester;?>'" class="pure-button pure-button-primary">下載專題一覽表-EXCEL</a>
 		</div>
 		</br>
 		<div align="center">
 			<!--<a type="button" onClick="location.href='download_score-list.php?semester=<?php echo $semester;?>'" class="pure-button pure-button-primary">下載成績總覽表</a>-->
-			<a type="button" onClick="location.href='download_overview-pdf.php?semester=<?php echo $semester;?>'" class="pure-button pure-button-primary">下載專題一覽表PDF</a>
+			<a type="button" onClick="location.href='download_overview-pdf.php?semester=<?php echo $semester;?>'" class="pure-button pure-button-primary">下載專題一覽表-PDF</a>
 		</div>
 		</br>
 		<div align="center"><a type="button" href="back_main.php" class="pure-button pure-button-primary">回主選單</a></div>
