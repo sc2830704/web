@@ -6,7 +6,7 @@ if(isset($_GET['semester'])){
 	$semester = $year_semester;
 }
 $query_workprj = 
-"SELECT DISTINCT Semester,Working_project.Group,Working_project.No,Working_project.Pid FROM Working_project WHERE Semester='$semester' ORDER BY Working_project.No";
+"SELECT DISTINCT Semester,Working_project.Group,Working_project.No,Working_project.Pid FROM Working_project WHERE Semester='$semester' ORDER BY Working_project.Group,Working_project.No";
 $result = mysql_query($query_workprj);
 $count = 0;
 

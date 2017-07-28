@@ -30,8 +30,6 @@ if(isset($_POST['semester'])){
 		}
 		$count++;
 	}
-	$query_state = "SELECT Sid FROM Score WHERE sll IS null";
-	$result = mysql_query($query_state);
 	
 }
 
@@ -78,11 +76,11 @@ if(isset($_POST['semester'])){
 								if($score_1[$i]<0)
 									{echo '<td><font color="red">未評分</font></td>';}
 								else
-									{echo '<td><a href=\'download.php?Sid='.$Sid[$i].'&order=1\';>下載</a></td>';}
+									{echo '<td><a href=\'download.php?Sid='.$Sid[$i].'&order=1&method=1\';>下載</a></td>';}
 								if($score_2[$i]<0)
 									{echo '<td><font color="red">未評分</font></td>';}
 								else
-									{echo '<td><a href=\'download.php?Sid='.$Sid[$i].'&order=2\';>下載</a></td>';}
+									{echo '<td><a href=\'download.php?Sid='.$Sid[$i].'&order=2&method=1\';>下載</a></td>';}
 								echo '</tr>';
 						}
 						
@@ -99,6 +97,13 @@ if(isset($_POST['semester'])){
 	</div></br>
 	<div align="center">
 		<a type="button" onClick="location.href='download_score-list.php?semester=<?php echo $semester;?>&order=2'" class="pure-button pure-button-primary">下載成績總覽表-下學期</a>  
+	</div></br>
+	
+	<div align="center">
+		<a type="button" onClick="location.href='download_batch.php?semester=<?php echo $semester;?>&order=1'" class="pure-button pure-button-primary">打包下載-上學期(.zip)</a>  
+	</div></br>
+	<div align="center">
+		<a type="button" onClick="location.href='download_batch.php?semester=<?php echo $semester;?>&order=2'" class="pure-button pure-button-primary">打包下載-下學期(.zip)</a>  
 	</div></br>
 	<div align="center"><a type="button" href="back_main.php" class="pure-button pure-button-primary">回主選單</a></div>
 </html>

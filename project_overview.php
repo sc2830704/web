@@ -11,7 +11,7 @@ while($row = mysql_fetch_array($result)){
 if(isset($_POST['semester'])){
 	$semester = $_POST['semester'];
 	$query_workprj = 
-	"SELECT DISTINCT Semester,Working_project.Group,Working_project.No,Working_project.Pid FROM Working_project WHERE Semester='$semester' ORDER BY Working_project.No";
+	"SELECT DISTINCT Semester,Working_project.Group,Working_project.No,Working_project.Pid FROM Working_project WHERE Semester='$semester' ORDER BY Working_project.Group, Working_project.No";
 	$result = mysql_query($query_workprj);
 	$count = 0;
 	while($row = mysql_fetch_array($result)){
