@@ -6,7 +6,7 @@
     <link rel=stylesheet type="text/css" href="style.css">
 </head>
  
-<body bgcolor="#ffffcc" style="font-family: DFKai-sb ;">
+<body bgcolor="#ffffcc" style="font-family:Microsoft JhengHei;">
 
 <?php
     if(!isset($_SESSION)){
@@ -24,7 +24,6 @@
         $result = mysql_query($query,$link);
 ?>
 
-<!--<h2 align="center"><?php #echo $now_year  ?> 年度電子工程系實務專題題目</h2>-->
 <h2 align="center">電子工程系實務專題題目</h2>
 
 <!--以下form-->
