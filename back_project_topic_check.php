@@ -54,7 +54,7 @@ $semester = $which_year.$now_semester;
     <link rel=stylesheet type="text/css" href="style.css">
 </head>
  
-<body bgcolor="#ffffcc" style="font-family: DFKai-sb ;">
+<body bgcolor="#ffffcc" style="font-family: Microsoft JhengHei ;">
 
 <h2 align="center">電子工程系實務專題題目</h2>
 
@@ -66,6 +66,11 @@ $semester = $which_year.$now_semester;
     <tr>
         <td align="center">老師姓名</td>
         <td align="center"><?php echo $Tname; ?></td> 
+    </tr>
+
+    <tr>
+        <td align="center">專題名稱</td>
+        <td><?php echo $topic; ?></td>  
     </tr>
 
     <tr>
