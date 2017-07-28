@@ -11,6 +11,11 @@ if(isset($_GET['order'])){
 }else{
 	die('錯誤505');
 }
+if(isset($_GET['method'])){
+	$method = $_GET['method'];	
+}else{
+	die('錯誤505');
+}
 $query_group = "SELECT Semester,Working_project.Group,Working_project.No FROM Working_project WHERE Sid='$Sid'";
 $result = mysql_query($query_group);
 $row = mysql_fetch_array($result);
@@ -23,12 +28,10 @@ if($order==1){
 }else{
 	$query = "SELECT faculty.name_ch,Working_project.Pid,Working_project.Sid,Student.Sid,Sname,s11_2,s12_2,s13_2,s14_2,s15_2,s21_2,s22_2,s23_2,s24_2,s25_2,s26_2,s27_2,s28_2,
 	s29_2,s210_2,s31_2,s32_2,s33_2,s34_2,s35_2,s36_2,w11_2,w12_2,w13_2,w14_2,w15_2,w21_2,w22_2,w23_2,w24_2,w25_2,w26_2,w27_2,w28_2,w29_2,w210_2,w31_2,w32_2,w33_2,w34_2,w35_2
-	,w36_2,score_2,total FROM Working_project,Score,Student,faculty WHERE Score.Sid='$Sid' AND Score.Sid=Student.Sid AND Student.Sid=Working_project.Sid AND faculty.username=Student.Tid";
+	,w36_2,score_2 FROM Working_project,Score,Student,faculty WHERE Score.Sid='$Sid' AND Score.Sid=Student.Sid AND Student.Sid=Working_project.Sid AND faculty.username=Student.Tid";
 
 }
 $result = mysql_query($query);
-echo 'query:'.$query;
-echo $result;
 error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
@@ -192,20 +195,29 @@ $objPHPExcel->getActiveSheet()->setTitle('project score');
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);
 
-$file_name = $Sid.'_'.$Sname;
-// Redirect output to a client’s web browser (Excel2007)
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="'.$file_name.'.xlsx"');
-header('Cache-Control: max-age=0');
-// If you're serving to IE 9, then the following may be needed
-header('Cache-Control: max-age=1');
+//$file_name = $Sid.'_'.$Sname;
+$file_name = $Sid;
+if($method==1){
+	// Redirect output to a client’s web browser (Excel2007)
+	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	header('Content-Disposition: attachment;filename="'.$file_name.'.xlsx"');
+	header('Cache-Control: max-age=0');
+	// If you're serving to IE 9, then the following may be needed
+	header('Cache-Control: max-age=1');
 
-// If you're serving to IE over SSL, then the following may be needed
-header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-header ('Pragma: public'); // HTTP/1.0
+	// If you're serving to IE over SSL, then the following may be needed
+	header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+	header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+	header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+	header ('Pragma: public'); // HTTP/1.0
 
-$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-$objWriter->save('php://output');
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter->save('php://output');
+}else{
+	header('Content-Type:text/html');
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter->save(dirname(__FILE__).'/../'.$file_name.'.xlsx');
+	echo "success";
+}
+
 exit;

@@ -1,5 +1,5 @@
 <?php 
-
+include('global.php');
 if(isset($_GET['semester'])){
 	$semester = $_GET['semester'];
 }else{
@@ -10,23 +10,39 @@ if(isset($_GET['order'])){
 }else{
 	die('ERROR 505');
 }
-
 //get sid
-$query = 'SELECT Student.Sid FROM Score WHERE Semester=\''.$_POST['semester'];
+$query = 'SELECT Sid FROM Score WHERE Semester=\''.$semester.'\'';
 $result = mysql_query($query);
 $count = 0;
 while($row = mysql_fetch_array($result)){
-	$sid[$count] = $row[0];
+	$sids[$count] = $row[0];
 	$count++;
 }
-$query_state = "SELECT Sid FROM Score WHERE sll IS null";
-$result = mysql_query($query_state);	
+//download to server
+$endpoint = "localhost/charlie/et/admin/project/web/download.php?";
+$ch = curl_init();
+foreach($sids as $sid){
+	$url = $endpoint."order=".$order."&Sid=".$sid."&method=0";
+	curl_setopt($ch,CURLOPT_URL,$url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$data =curl_exec($ch);
+}
+curl_close();
 
-$files = array('readme.txt', 'test.html');
-$zipname = 'file.zip';
+
+
+
+//打包壓縮檔
+
+$files = array();
+foreach($sids as $sid){
+	array_push($files,'../'.$sid.'.xlsx');
+}
+$zipname = $semester.'-'.$order.'.zip';
 $zip = new ZipArchive;
 $zip->open($zipname, ZipArchive::CREATE);
 foreach ($files as $file) {
+  $new_filename = substr($file,strrpos($file,'\\') + 1);
   $zip->addFile($file);
 }
 $zip->close();
@@ -36,4 +52,13 @@ header('Content-disposition: attachment; filename='.$zipname);
 header('Content-Length: ' . filesize($zipname));
 readfile($zipname);
 
+foreach ($files as $file) {
+  unlink($file);
+}
+
+
 ?>
+
+<script>
+	
+</script>
