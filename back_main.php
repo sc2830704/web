@@ -18,6 +18,7 @@ include("auth_check.php");
 			</br>
 			<a href='back_project_topic.php'><h3>新增專題</h3></a></br>
 			<a href='input.php'><h3>輸入專題資料</h3></a></br>
+			<a href='back_change_team.php'><h3>換組作業</h3></a></br>
 			<a href='project_overview.php'><h3>專題一覽表</h3></a></br>	
 			<a href='list.php'><h3>下載評分表</h3></a></br>
 			<a href="view_project.php"><h3>實務專題列表</h3></a></br>
