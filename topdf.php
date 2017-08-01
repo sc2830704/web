@@ -1,8 +1,8 @@
 <?php
 include("global.php");
 require_once('../TCPDF-master/tcpdf.php');
-$dropdown = $_POST['dropdown'];
-$whichsemester = $_POST['which_year'];
+$dropdown = $_GET['Tid'];
+$whichsemester = $_GET['Which_year'];
 $seme = substr($whichsemester,-1,1);
 $year = substr($whichsemester,0,-1);
 
