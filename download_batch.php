@@ -11,7 +11,7 @@ if(isset($_GET['order'])){
 	die('ERROR 505');
 }
 //get sid
-$query = 'SELECT Sid FROM Score WHERE Semester=\''.$semester.'\'';
+$query = 'SELECT Sid FROM score WHERE Semester=\''.$semester.'\'';
 $result = mysql_query($query);
 $count = 0;
 while($row = mysql_fetch_array($result)){
@@ -19,7 +19,7 @@ while($row = mysql_fetch_array($result)){
 	$count++;
 }
 //download to server
-$endpoint = "localhost/charlie/et/admin/project/web/download.php?";
+$endpoint = "localhost/et/admin/project/web/download.php?";
 $ch = curl_init();
 foreach($sids as $sid){
 	$url = $endpoint."order=".$order."&Sid=".$sid."&method=0";
@@ -27,7 +27,7 @@ foreach($sids as $sid){
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$data =curl_exec($ch);
 }
-curl_close();
+curl_close($ch);
 
 
 
@@ -42,7 +42,7 @@ $zipname = $semester.'-'.$order.'.zip';
 $zip = new ZipArchive;
 $zip->open($zipname, ZipArchive::CREATE);
 foreach ($files as $file) {
-  $new_filename = substr($file,strrpos($file,'\\') + 1);
+  //$new_filename = substr($file,strrpos($file,'\\') + 1);
   $zip->addFile($file);
 }
 $zip->close();
@@ -55,7 +55,7 @@ readfile($zipname);
 foreach ($files as $file) {
   unlink($file);
 }
-
+unlink($zipname);
 
 ?>
 
