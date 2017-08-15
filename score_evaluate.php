@@ -4,26 +4,26 @@
 
 	# choosing students in different semester
 	// $now_month = 1;	# for test
-	if($now_month==1 ||$now_month==2 || $now_month==3 ){
-		$y1 = (int)($now_year-1);
-		$y2 = (int)($now_year);
-		$stu1 = (string)$y1."2";
-		$stu2 = (string)$y2."1";
-	}
-	else if($now_month==5 ||$now_month==6 || $now_month==7){
-		$y = (int)($now_year);
-		$y = (int)($now_year);
-		$stu1 = (string)$y."1";
-		$stu2 = (string)$y."2";
-	}
-	else{
-		echo '<body bgcolor="#ffffcc" style="font-family:Microsoft JhengHei;">';
-		echo "上學期評分時間：1月~3月<br>";
-		echo "下學期評分時間：5月~7月<br>";
-		echo "現在非評分時間!";
-		echo '</body>';
-		exit;
-	}
+	// if($now_month==1 ||$now_month==2 || $now_month==3 ){
+	// 	$y1 = (int)($now_year-1);
+	// 	$y2 = (int)($now_year);
+	// 	$stu1 = (string)$y1."2";
+	// 	$stu2 = (string)$y2."1";
+	// }
+	// else if($now_month==5 ||$now_month==6 || $now_month==7){
+	// 	$y = (int)($now_year);
+	// 	$y = (int)($now_year);
+	// 	$stu1 = (string)$y."1";
+	// 	$stu2 = (string)$y."2";
+	// }
+	// else{
+	// 	echo '<body bgcolor="#ffffcc" style="font-family:Microsoft JhengHei;">';
+	// 	echo "上學期評分時間：1月~3月<br>";
+	// 	echo "下學期評分時間：5月~7月<br>";
+	// 	echo "現在非評分時間!";
+	// 	echo '</body>';
+	// 	exit;
+	// }
 ?>
 
 <?php 

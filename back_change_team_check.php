@@ -57,8 +57,24 @@ $sqlNewTeaProject = "SELECT DISTINCT Pid
 		WHERE Tid = '$NewTeaID'";
 $result4 = mysql_query($sqlNewTeaProject,$link);
 
-
 ?>
+
+<script language="JavaScript">
+
+// check choosing prj
+function check(){ 
+
+	if(document.form1.NewPrj.value == "default") {
+        alert("未選擇專題");
+        return false;
+	} 
+	else {
+    	var form1 = document.getElementById("form1");
+		form1.submit();
+	}
+}
+
+</script>
 
 <html>
 <head>
@@ -96,7 +112,7 @@ $result4 = mysql_query($sqlNewTeaProject,$link);
 
     <tr>
 		<td align="center">更換之專題名稱</td>
-        <td><select style="width:450px;height:30px;font-size:20px;" name="NewPrj">	<!--選擇教授選單-->
+        <td><select style="width:450px;height:30px;font-size:20px;" name="NewPrj" id = "NewPrj">	<!--選擇教授選單-->
         <option value='default'>請選擇</option>
         <?php 
 			 while ( $row = mysql_fetch_array($result4))
@@ -112,15 +128,16 @@ $result4 = mysql_query($sqlNewTeaProject,$link);
 	</tr>
 	</table>
 
-
-<center><button type="submit" name="submit" style="width:120px;height:40px;font-size:20px">確定</button></center>
+<center><button type="submit" name="submit" onclick="return check()" style="width:120px;height:40px;font-size:20px">確定</button></center>
 </form>
 
 <?php
-	$_SESSION['NewTeaID'] = $NewTeaID;
-	$_SESSION['StuName'] = $StuName;
-	$_SESSION['StuID'] = $StuID;
-	$_SESSION['NewTeaName'] = $NewTeaName;
+
+# ------------saving information of query in session------------#
+$_SESSION['NewTeaID'] = $NewTeaID;
+$_SESSION['StuName'] = $StuName;
+$_SESSION['StuID'] = $StuID;
+$_SESSION['NewTeaName'] = $NewTeaName;
 
 ?>
 
